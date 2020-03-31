@@ -18,6 +18,8 @@ class KanbanController extends AbstractController
             $milestones[$key]['closedIssues'] = $gitHubService->getIssuesByStatusForMilestone('closed' , $milestone['number']);
         }
 
-        Return new JsonResponse($milestones);
+        return $this->render('view.html.twig', [
+            'milestones' => $milestones
+        ]);
     }
 }
