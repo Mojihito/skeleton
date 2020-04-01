@@ -1,6 +1,54 @@
 {
+    "clue/stream-filter": {
+        "version": "v1.4.1"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.x-dev"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4-dev"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.x-dev"
+    },
+    "knplabs/github-api": {
+        "version": "2.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.6",
+            "ref": "a7d5781e4a8e84f1c238c43e4c9bb806f01d8a3f"
+        },
+        "files": [
+            "./config/packages/github_api.yaml"
+        ]
+    },
     "php": {
         "version": "7.4"
+    },
+    "php-http/cache-plugin": {
+        "version": "1.7.0"
+    },
+    "php-http/client-common": {
+        "version": "2.1.x-dev"
+    },
+    "php-http/discovery": {
+        "version": "1.7-dev"
+    },
+    "php-http/guzzle6-adapter": {
+        "version": "2.x-dev"
+    },
+    "php-http/httplug": {
+        "version": "2.x-dev"
+    },
+    "php-http/message": {
+        "version": "1.8-dev"
+    },
+    "php-http/message-factory": {
+        "version": "1.0-dev"
+    },
+    "php-http/promise": {
+        "version": "1.1-dev"
     },
     "psr/cache": {
         "version": "1.0.x-dev"
@@ -11,8 +59,17 @@
     "psr/event-dispatcher": {
         "version": "1.0.x-dev"
     },
+    "psr/http-client": {
+        "version": "1.0.x-dev"
+    },
+    "psr/http-message": {
+        "version": "1.0.x-dev"
+    },
     "psr/log": {
         "version": "1.1.x-dev"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "symfony/cache": {
         "version": "5.1-dev"
@@ -96,6 +153,9 @@
     "symfony/http-kernel": {
         "version": "5.1-dev"
     },
+    "symfony/options-resolver": {
+        "version": "5.1-dev"
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "1.15-dev"
     },
@@ -131,6 +191,29 @@
     "symfony/string": {
         "version": "5.1-dev"
     },
+    "symfony/translation-contracts": {
+        "version": "2.0-dev"
+    },
+    "symfony/twig-bridge": {
+        "version": "5.1-dev"
+    },
+    "symfony/twig-bundle": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "fab9149bbaa4d5eca054ed93f9e1b66cc500895d"
+        },
+        "files": [
+            "./config/packages/test/twig.yaml",
+            "./config/packages/twig.yaml",
+            "./templates/base.html.twig"
+        ]
+    },
+    "symfony/twig-pack": {
+        "version": "dev-master"
+    },
     "symfony/var-dumper": {
         "version": "5.1-dev"
     },
@@ -139,5 +222,11 @@
     },
     "symfony/yaml": {
         "version": "5.1-dev"
+    },
+    "twig/extra-bundle": {
+        "version": "3.x-dev"
+    },
+    "twig/twig": {
+        "version": "3.x-dev"
     }
 }
