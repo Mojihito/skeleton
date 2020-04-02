@@ -1,31 +1,54 @@
 <?php
 
-
 namespace App\Services;
 
-use http\Client;
+use App\Interfaces\AuthenticationInterface;
+use App\Interfaces\AuthorizationInterface;
 
 class GitHubService
 {
 
-    private $githubOwner;
-    private $repo;
+    CONST STATUS_OPENED_ISSUES = 'open';
+    CONST STATUS_CLOSED_ISSUES = 'closed';
+
+    /** @var string */
+    private $owner;
+
+    /** @var string */
+    private $repository;
+
+    /** @var \Github\Client */
     private $client;
 
-    public function __construct(string $githubOwner, string $repo)
+    /** @var AuthorizationInterface */
+    private $authenticationStrategy;
+
+    public function __construct(AuthenticationInterface $authenticationStrategy, string $owner = null, string $repository = null)
     {
         $this->client = new \Github\Client();
-        $this->githubOwner = $githubOwner;
-        $this->repo = $repo;
+        $this->authenticationStrategy = $authenticationStrategy;
+        $this->authenticationStrategy->authenticate($this->client);
+        $this->owner = $owner;
+        $this->repository = $repository;
     }
 
     public function getIssuesByStatusForMilestone(string $status, int $mileStoneNumber)
     {
-        return $this->client->api('issue')->all($this->githubOwner , $this->repo  , array('milestone' => $mileStoneNumber , 'state' => $status));
+        return $this->client->api('issue')->all($this->owner , $this->repository  , array('milestone' => $mileStoneNumber , 'state' => $status));
     }
 
     public function getAllMilestones()
     {
-        return $this->client->api('issue')->milestones()->all( $this->githubOwner, $this->repo , ['state' => 'all']);
+        return $this->client->api('issue')->milestones()->all( $this->owner, $this->repository , ['state' => 'all']);
+    }
+
+    public function setGithubOwner(string $owner)
+    {
+        $this->owner = $owner;
+    }
+
+    public function setRepository(string $repository)
+    {
+        $this->repository = $repository;
     }
 }

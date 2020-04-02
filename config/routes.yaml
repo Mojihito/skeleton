@@ -1,3 +1,7 @@
+app_choose_repo:
+   path: /chooserepo
+   controller: App\Controller\KanbanController::chooseRepo
+
 app_show_kanban_board:
-   path: /kanban
+   path: /kanban/{owner}/{repository}
    controller: App\Controller\KanbanController::showKanbanBoard
