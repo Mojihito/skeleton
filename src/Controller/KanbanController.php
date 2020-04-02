@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Services\GitHubAnonymousStrategy;
+
 use App\Services\GitHubService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,6 +23,8 @@ class KanbanController extends AbstractController
         foreach ($milestones as $key => $milestone){
             $milestones[$key]['openedIssues'] = $gitHubService->getIssuesByStatusForMilestone($gitHubService::STATUS_OPENED_ISSUES , $milestone['number']);
             $milestones[$key]['closedIssues'] = $gitHubService->getIssuesByStatusForMilestone($gitHubService::STATUS_CLOSED_ISSUES , $milestone['number']);
+            $milestones[$key]['total'] = count($milestones[$key]['closedIssues']) + count($milestones[$key]['openedIssues']);
+            $milestones[$key]['completedPercentage'] =  (count($milestones[$key]['closedIssues']) / $milestones[$key]['total'] ) * 100;
         }
 
         return $this->render('view.html.twig', [
