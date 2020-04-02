@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\GitHubAnonymousStrategy;
 use App\Services\GitHubService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -10,12 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class KanbanController extends AbstractController
 {
-    public function showKanbanBoard(Request $request, GitHubService $gitHubService)
+    public function showKanbanBoard(Request $request)
     {
         $owner = $request->get('owner');
         $repository = $request->get('repository');
-        $gitHubService->setGithubOwner($owner);
-        $gitHubService->setRepository($repository);
+
+        $gitHubService = new GitHubService(new GitHubAnonymousStrategy(), $owner, $repository);
+
         $milestones = $gitHubService->getAllMilestones();
         foreach ($milestones as $key => $milestone){
             $milestones[$key]['openedIssues'] = $gitHubService->getIssuesByStatusForMilestone($gitHubService::STATUS_OPENED_ISSUES , $milestone['number']);

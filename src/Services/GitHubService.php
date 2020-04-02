@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Interfaces\AuthenticationInterface;
+use App\Interfaces\AuthorizationInterface;
+
 class GitHubService
 {
 
@@ -17,9 +20,16 @@ class GitHubService
     /** @var \Github\Client */
     private $client;
 
-    public function __construct()
+    /** @var AuthorizationInterface */
+    private $authenticationStrategy;
+
+    public function __construct(AuthenticationInterface $authenticationStrategy, string $owner = null, string $repository = null)
     {
         $this->client = new \Github\Client();
+        $this->authenticationStrategy = $authenticationStrategy;
+        $this->authenticationStrategy->authenticate($this->client);
+        $this->owner = $owner;
+        $this->repository = $repository;
     }
 
     public function getIssuesByStatusForMilestone(string $status, int $mileStoneNumber)
